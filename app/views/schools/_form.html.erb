@@ -1,0 +1,24 @@
+<%= simple_form_for @school,html: { multipart: true } do |f| %>
+
+  <%= f.input :name, label: "Name",class: "input" %>
+  <br>
+   <%= f.input :email, label: "Email Address",class: "input" %>
+  <br>
+   <%= f.input :website, label: "Website",class: "input" %>
+  <br>
+   <%= f.input :address, label: "Address",class: "input" %>
+  <br>
+   <%= f.input :phone, label: "Phone",class: "input" %>
+  <br>
+  <%= f.association :boards,   as: :check_boxes %>
+   <br>
+  <%= f.input :about_us, :label => 'About Us', :input_html => { :rows => 10 }%>
+   <label class="password required">Upload an image</label> 
+
+  <%= f.file_field :school_img %>
+   <br>
+   <br>
+
+  <%= f.button :submit,class: "button" %>
+  <br>
+<% end %>

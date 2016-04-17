@@ -1,0 +1,6 @@
+<%= simple_form_for @board,html: { multipart: true } do |f| %>
+ 
+  <%= f.input :name, label: "Name of Board" %>
+  <br>
+  <%= f.button :submit %>
+<% end %>
