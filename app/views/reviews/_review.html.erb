@@ -1,0 +1,31 @@
+<% admin=Admin.find(review.admin_id) %>
+<% if admin.student.present? %>
+<li> 
+                           
+                            <%= image_tag(admin.student.student_img.url(:medium), :class =>  "img-testimonial") %>
+                            <p><%= review.comment%></p>
+                           
+                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= review.rating %>"></div><%= admin.student.full_name%> - <span> Student</span></h3>
+                        </li>
+<% elsif admin.teacher.present? %>
+<li> 
+                           
+                            <%= image_tag(admin.teacher.teacher_img.url(:medium), :class =>  "img-testimonial") %>
+                            <p><%= review.comment%></p>
+                           
+                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= review.rating %>"></div><%= admin.teacher.full_name%> - <span> Teacher</span></h3>
+                        </li>
+
+<% else %>
+<li>						 
+                          
+                           <%= image_tag(admin.teacher.teacher_img.url(:medium), :class =>  "img-testimonial") %>
+                            <h4>Comment</h4>
+                            <p><%= review.comment%></p>
+                           
+                            <h3 class="testimonial-title">Anonymous - <span> Parent</span></h3>
+                        </li><% end %>
+
+
+<br>
+

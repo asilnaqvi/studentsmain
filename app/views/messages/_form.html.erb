@@ -1,0 +1,9 @@
+<%= simple_form_for @message,html: { multipart: true } do |f| %>
+
+  <%= f.input :title, label: "Title",class: "input" %>
+  <br>
+   <%= f.input :description, label: "Description",class: "input" %>
+  <br>
+  <%= f.button :submit,class: "button" %>
+  <br>
+<% end %>

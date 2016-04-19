@@ -25,12 +25,25 @@
                 <article class="static-page">
                     <h1 id="main-title">Greetings from - <span><%= @school.name%></span></h1>
                    <%= image_tag @school.school_img.url,class: "align-left" %>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare, ipsum quis aliquam lobortis, felis sapien rutrum risus, posuere ultrices quam nisi nec nulla. Vestibulum ipsum diam, congue in nunc et, placerat faucibus nunc. Proin consectetur mauris quis tincidunt faucibus. Suspendisse lobortis blandit aliquet. Cras a luctus orci. Aenean pretium venenatis gravida. Morbi varius erat erat, vitae sollicitudin tortor ornare tincidunt.</p>
+                    <p><%= @school.about_us%></p>
                   <p><h3>Available Boards</h3>
                   	<ul><% @boards.each do |board|%>
                   	<li><%= board.name%></li>
                   	<%end%></ul>
                   </p>
+                  
+                  <%=link_to "Add Reviews", new_school_review_path(@school), class: "button" %>
+                </article>
+                 <article class="static-page">
+                   
+                   <p><h3> Reviews</h3> </p>
+                   
+                 
+                    <ul class="list-testimonial">
+
+                         <%= render @school.reviews%>
+                       
+                    </ul>
                 </article>
             </div>
             <div id="sidebar">
@@ -38,6 +51,8 @@
                     <div class="widget-wrapper clearfix">
 				        <h3 class="widget-title">School Specs</h3>
                         <ul>
+                            <li><center><div class="average-review-rating" data-source="<%= @average_review%>"></div>
+                            <span class="numberofreviews"><em>From:</em> <%= @school.reviews.count%> reviews</span> </center></li>
                             <li>Name: <%= @school.name%> </li>
                             <li>Email: <a href="#"><%= @school.email%></a></li>
                             <li>Website: <a href="#"><%= @school.website%></a></li>
@@ -131,3 +146,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+            $('.review-rating').raty({
+                readOnly: true,
+                score:function() {
+                    return $(this).attr('data-score');
+                },
+                path: '/assets'
+            });
+
+    </script>
+     <script>
+            $('.average-review-rating').raty({
+                readOnly: true,
+                score:function() {
+                    return $(this).attr('data-source');
+                },
+                path: '/assets'
+            });
+
+    </script>

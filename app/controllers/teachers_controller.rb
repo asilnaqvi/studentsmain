@@ -40,10 +40,10 @@ before_action :find_teacher, only: [:show,:edit,:update,:destroy]
 	end
 	private
 	def params_teacher
-		params.require(:teacher).permit(:full_name,:teacher_img,:past_experience,:qualification,:school_ids=> [])
+		params.require(:teacher).permit(:full_name,:about_us,:teacher_img,:past_experience,:qualification,:school_ids=> [])
 	end
 	def find_teacher
-		@teacher=teacher.find(params[:id])
+		@teacher=Teacher.find(params[:id])
 	end
 
 

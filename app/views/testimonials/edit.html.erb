@@ -1,0 +1,17 @@
+<%= simple_form_for ([ @teacher, @teacher.testimonials.build]) do |f| %>
+<div id="rating-form">
+  <label> Rating </label>
+</div>
+  <br>
+   <%= f.input :testimonial, label: "Comment",class: "input" %>
+  <br>
+   <%= f.button :submit,class: "button" %>
+  <br>
+<% end %>
+
+<script>
+$('#rating-form').raty({
+  path: '/assets/',
+  scoreName: 'testimonial[rating]'
+});
+</script>

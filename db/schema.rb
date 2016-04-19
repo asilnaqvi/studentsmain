@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417164022) do
+ActiveRecord::Schema.define(version: 20160419182821) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -43,6 +43,25 @@ ActiveRecord::Schema.define(version: 20160417164022) do
     t.integer "board_id",  null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "message_id"
+    t.integer  "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["admin_id"], name: "index_comments_on_admin_id"
+  add_index "comments", ["message_id"], name: "index_comments_on_message_id"
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "admin_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
     t.text     "comment"
@@ -56,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160417164022) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "admin_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -96,6 +116,7 @@ ActiveRecord::Schema.define(version: 20160417164022) do
     t.string   "student_img_content_type"
     t.integer  "student_img_file_size"
     t.datetime "student_img_updated_at"
+    t.text     "about_us"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -109,6 +130,31 @@ ActiveRecord::Schema.define(version: 20160417164022) do
     t.string   "teacher_img_content_type"
     t.integer  "teacher_img_file_size"
     t.datetime "teacher_img_updated_at"
+    t.text     "about_us"
   end
+
+  create_table "testimonials", force: :cascade do |t|
+    t.integer  "rating"
+    t.text     "testimonial"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "teacher_id"
+    t.integer  "admin_id"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
 
 end

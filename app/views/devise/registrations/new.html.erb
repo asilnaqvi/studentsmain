@@ -31,7 +31,7 @@
     <%= f.input :password_confirmation, required: true, class: "input" %>
    <label class="password required"><abbr title="required">*</abbr> Role Select</label> 
    
-     <%= f.collection_select :role_id, Role.all,:id,:name,hint: ("Once created cannot be changed" , include_blank: "Choose your role", class: "input", required: true %>
+     <%= f.collection_select :role_id, Role.all,:id,:name,hint: ("Once created cannot be changed") , include_blank: "Choose your role", class: "input", required: true %>
     <%= f.button :submit, "Sign up", class: "button" %>
  </div>
 <% end %>

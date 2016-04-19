@@ -7,6 +7,8 @@
   <br>
   <%= f.association :schools,   as: :check_boxes %>
   <br>
+      <%= f.input :about_us, label: "About",class: "input" %>
+ <br>
   <label class="password required">Upload an image</label> 
   <%= f.file_field :teacher_img %>
   <br>

@@ -5,7 +5,10 @@ class Admin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 has_many :schools
 has_many :reviews
+has_many :testimonials
+has_many :messages
 has_one :teacher
 has_one :student
-has_one :role
+belongs_to :role
+has_many :comments
 end

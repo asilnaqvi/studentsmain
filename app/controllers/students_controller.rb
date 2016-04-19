@@ -38,7 +38,7 @@ before_action :find_student, only: [:show,:edit,:update,:destroy]
 	end
 	private
 	def params_student
-		params.require(:student).permit(:full_name,:student_img,:contact_no,:admission_year,:qualification,:school_ids=> [])
+		params.require(:student).permit(:full_name,:about_us,:student_img,:contact_no,:admission_year,:qualification,:school_ids=> [])
 	end
 	def find_student
 		@student=Student.find(params[:id])

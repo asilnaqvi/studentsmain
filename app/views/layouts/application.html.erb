@@ -77,29 +77,31 @@
                         <% end  %>
                           <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
                     	<%elsif admin_signed_in? && (current_admin.role_id == 1)%>
-                        <% if current_admin.teacher(current_admin) %>
+                        <% if current_admin.teacher.present? %>
                           <% if (params[:controller] == 'teachers' && params[:action]=='show') %>
                         <li><a href="#"><%=link_to "Edit Profile",edit_teacher_path%></a></li>
                         <% end%>
                         <%else%>
                          <li><a href="#"><%=link_to "Create Profile",new_teacher_path%></a></li>
                          <% end%>
-                        <li><a href="#">Post Message</a></li>
-                        <li><a href="#">Write a Review</a></li>
+                        <li><%=link_to "Post Message",new_message_path%></li>
+                         <% if (params[:controller] == 'schools' && params[:action]=='show') %>
+                        <li><a href="#"><%=link_to "Add Reviews", new_school_review_path(@school) %></a> </li><% end%>
                         <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
                         <%elsif admin_signed_in? && (current_admin.role_id == 2)%>
-                        <% if current_admin.student.blank? %>
+                        <% if current_admin.student.present? %>
                          <% if (params[:controller] == 'students' && params[:action]=='show') %>
                         <li><a href="#"><%=link_to "Edit Profile",edit_student_path%></a></li>
                         <% end%>
                         <%else%>
                          <li><a href="#"><%=link_to "Create Profile",new_student_path%></a></li>
                          <% end%>
-                        <li><a href="#">Post Message</a></li>
-                        <li><a href="#">Write a Review</a></li>
+                        <li><%=link_to "Post Message",new_message_path%></li>
+                        <% if (params[:controller] == 'schools' && params[:action]=='show') %>
+                        <li><a href="#"><%=link_to "Add Reviews", new_school_review_path(@school) %></a></li> <% end%>
                         <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
                         <%elsif admin_signed_in? && (current_admin.role_id == 4)%>
-                        <li><a href="#">Post Message</a></li>
+                        <li><%=link_to "Post Message",new_message_path%></li>
                         <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
                         <% else%>
                         <% if !admin_signed_in?%>
@@ -124,33 +126,16 @@
                             <span class="icon-bar"></span>
                         </a>
                         <ul id="nav-main">
-                            <li><a href="index.html">Home</a></li>
-                            <li class="current-menu-item"><a href="about.html">About</a></li>
-                            <li><a href="#">News</a>
-                                <ul>
-                                    <li><a href="newslist.html">News List</a></li>
-                                    <li><a href="newsdetail.html">News Detail</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="event.html">Event</a></li>
-                            <li><a href="testimonial.html">Testimonial</a></li>
-                            <li><a href="team.html">Teacher</a></li>
-                            <li><a href="#">Other</a>
-                                <ul>
-                                    <li><a href="#">Color Variation</a>
-                                        <ul>
-                                            <li><a href="../maroon/">Maroon</a></li>
-                                            <li><a href="../blue/">Blue</a></li>
-                                            <li><a href="../green/">Green</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="history.html">History</a></li>
-                                    <li><a href="gallery.html">Gallery</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="fullpage.html">Full Page no Sidebar</a></li>
-                                    <li><a href="typography.html">Typography</a></li>
-                                </ul>
-                            </li>
+                            <li <%if current_page?(root_path)%> class="current-menu-item"<%end%>>
+                                <%= link_to "Home",root_path%></li>
+                            <li<%if current_page?(schools_path)%> class="current-menu-item"<%end%>>
+                            <%= link_to "Schools",schools_path%></li>
+                            <li<%if current_page?(students_path)%> class="current-menu-item"<%end%>>
+                            <%= link_to "Students",students_path%></li>
+                            <li<%if current_page?(teachers_path)%> class="current-menu-item"<%end%>>
+                            <%= link_to "Teachers",teachers_path%></li>
+                            <li<%if current_page?(messages_path)%> class="current-menu-item"<%end%>>
+                            <%= link_to "Forum",messages_path%></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                         <% if !admin_signed_in?%>
@@ -218,10 +203,11 @@
                 <a href="#" id="logo-footer"><%= image_tag "logo-footer.png" %></a>
                 <p id="text-address">P Sherman, 42 Wallaby Way, Australia</p>
                 <ul id="nav-footer" class="clearfix">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Contact</a></li>
+                            <li><%= link_to "Home",root_path%></li>
+                            <li><%= link_to "Schools",schools_path%></li>
+                            <li><%= link_to "Students",students_path%></li>
+                            <li><%= link_to "Teachers",teachers_path%></li>
+                            <li><%= link_to "Forum",messages_path%></li>
                 </ul>
                 <p id="text-copyright">Copyright &copy; 2013. All rights reserved</p>
             </div>

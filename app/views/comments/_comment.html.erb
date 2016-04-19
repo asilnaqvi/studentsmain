@@ -1,0 +1,29 @@
+<div
+class="comment comment-wrap" ><div
+class="comment-avatar"><% if comment.admin.role_id==1%>
+	<%=image_tag comment.admin.teacher.teacher_img,size: "60",class: "thumbnail" %>
+          <%= comment.admin.teacher.full_name %>
+       <% elsif comment.admin.role_id==2 %> 
+      <%=image_tag comment.admin.student.student_img, size: "60",class: "thumbnail" %>
+        <%= comment.admin.student.full_name %> <%   else %>
+       <%=image_tag "placeholder_avatar.png", size: "60",class: "thumbnail" %>
+        <%    end %></div>
+<div class="author-comment"> <cite
+class="fn">	<% if comment.admin.role_id==1%>
+	
+          <%= link_to comment.admin.teacher.full_name,teacher_path(comment.admin.teacher) %>
+       <% elsif comment.admin.role_id==2 %> 
+    
+       <%= link_to comment.admin.student.full_name,student_path(comment.admin.student) %>
+        <%   else %>
+        <%=    puts 'Anonymous'%>
+        <%    end %> 
+
+                                <span><%= link_to image_tag("Pencil-icon.png"),edit_message_comment_path(comment.message,comment)%></span>
+                                <span><%= link_to image_tag("trash-icon.png"),message_comment_path(comment.message,comment), method: :delete, data: {confirm: "Are you sure?"}%>
+                                </span>
+                                </cite><div
+class="comment-meta commentmetadata"><%=comment.created_at%></div></div><div
+class="clear"></div><div
+class="comment-content"><p><%= comment.content %></p></div><div
+class="reply"></div><%= link_to like_message_comment_path(comment.message,comment),class: "btn btn-default",method: :put do %><span class="glyphicon glyphicon-thumbs-up"></span><%= comment.get_upvotes.size%><%end%></div>

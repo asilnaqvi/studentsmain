@@ -25,6 +25,11 @@ class SchoolsController < ApplicationController
 
 	def show
 		@boards=@school.boards
+		if @school.reviews.blank?
+			@average_review=0
+else
+			@average_review=@school.reviews.average(:rating).round(2)
+		end
 		
 	end
 
