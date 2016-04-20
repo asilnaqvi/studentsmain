@@ -5,9 +5,10 @@
                             <%= image_tag(admin.student.student_img.url(:medium), :class =>  "img-testimonial") %>
                             <p><%= testimonial.testimonial%></p>
                            
-                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= testimonial.rating %>"><% if current_admin.id == testimonial.admin_id%> <div style="float:right; margin-right:55px;"><span><%= link_to image_tag("Pencil-icon.png"),edit_teacher_testimonial_path(testimonial.teacher,testimonial)%></span>
+                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= testimonial.rating %>"><% if current_admin%><% if current_admin.id == testimonial.admin_id%> <div style="float:right; margin-right:55px;"><span><%= link_to image_tag("Pencil-icon.png"),edit_teacher_testimonial_path(testimonial.teacher,testimonial)%></span>
                                 <span><%= link_to image_tag("trash-icon.png"),teacher_testimonial_path(testimonial.teacher,testimonial), method: :delete, data: {confirm: "Are you sure?"}%>
                                 </span></div>
+<%end%>
 <%end%></div>
                             	
  <%= admin.student.full_name%> - <span> Student</span></h3>
@@ -18,10 +19,14 @@
                             <%= image_tag(admin.teacher.teacher_img.url(:medium), :class =>  "img-testimonial") %>
                             <p><%= testimonial.testimonial%></p>
                            
-                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= testimonial.rating %>"> <% if current_admin.id == testimonial.admin_id%> <div style="float:right; margin-right:55px;"><span><%= link_to image_tag("Pencil-icon.png"),edit_teacher_testimonial_path(testimonial.teacher,testimonial)%></span>
+                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= testimonial.rating %>"> 
+<% if current_admin%>
+                                <% if current_admin.id == testimonial.admin_id%> <div style="float:right; margin-right:55px;"><span><%= link_to image_tag("Pencil-icon.png"),edit_teacher_testimonial_path(testimonial.teacher,testimonial)%></span>
                                 <span><%= link_to image_tag("trash-icon.png"),teacher_testimonial_path(testimonial.teacher,testimonial), method: :delete, data: {confirm: "Are you sure?"}%>
                                 </span></div>
 <%end%>
+<%end%>
+
                             	 </div><%= admin.teacher.full_name%> - <span> Teacher</span></h3>
                         </li>
 

@@ -17,10 +17,10 @@
                      <h2>General Question</h2>
                       <% @messages.each do |message| %>
                             <h3 class="title-faq"><%=link_to message.title, message_path(message)%>
-                               <% if current_admin.id == message.admin_id%> <span><%= link_to image_tag("Pencil-icon.png"),edit_message_path(message)%></span>
+                               <%if current_admin%><%if current_admin.id == message.admin_id %> <span><%= link_to image_tag("Pencil-icon.png"),edit_message_path(message)%></span>
                                 <span><%= link_to image_tag("trash-icon.png"),message_path(message), method: :delete, data: {confirm: "Are you sure?"}%>
                                 </span>
-<%end%>  
+<%end%><%end%>    
                             </h3>
                       <%end%>      
                             
