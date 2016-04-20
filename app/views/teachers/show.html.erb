@@ -26,12 +26,16 @@
                     <h1 id="main-title"><span><%= @teacher.full_name%></span></h1>
                    <%= image_tag @teacher.teacher_img.url(:medium),class: "align-left" %>
                     <p><%= @teacher.about_us%></p>
-                  <p><h3>My Schools</h3>
+                  <p><h3>Worked in:</h3>
                   	<ul><% @schools.each do |school|%>
                   	<li><%= school.name%></li>
                   	<%end%></ul>
                   </p>
-                  
+                   <p><h3>Expertise:</h3>
+                    <ul><% @subjects.each do |subject|%>
+                    <li><%= subject.name%></li>
+                    <%end%></ul>
+                  </p>
                   <%=link_to "Write Testimonial", new_teacher_testimonial_path(@teacher), class: "button" %>
                 </article>
                  <article class="static-page">

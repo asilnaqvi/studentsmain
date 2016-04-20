@@ -5,9 +5,16 @@ class TeachersController < ApplicationController
 
 	
 	def index
+	@subjects=Subject.all
+		if params[:subject].blank?
 	@teachers=Teacher.all.order("created_at DESC")
+else
+	@subject=Subject.find_by(name: params[:subject])
+	@teachers=@subject.teachers
+end
 	end
 	def new
+		@qualification=Qualification.all.map{|c| [c.name, c.id]}
 		@teacher=current_admin.build_teacher
 	end
 	def create
@@ -20,6 +27,7 @@ class TeachersController < ApplicationController
 	end
 
 	def show
+		@subjects=@teacher.subjects
 		@schools=@teacher.schools
 		if @teacher.testimonials.blank?
 			@average_testimonial=0
@@ -48,7 +56,7 @@ else
 	end
 	private
 	def params_teacher
-		params.require(:teacher).permit(:full_name,:about_us,:teacher_img,:past_experience,:qualification,:school_ids=> [])
+		params.require(:teacher).permit(:full_name,:about_us,:teacher_img,:past_experience,:qualification,:subject_ids=> [],:school_ids=> [])
 	end
 	def find_teacher
 		@teacher=Teacher.find(params[:id])

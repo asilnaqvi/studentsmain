@@ -62,13 +62,14 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a href="#" id="logo"><%= image_tag "logo.png" %></a>
-                <aside id="header-content">
+                <aside id="header-content"> 
                     <form method="post" action="#" id="searchform">
                         <div>
                             <input type="text" name="search" class="input" />
                             <input type="submit" name="submitsearch" class="button" value="Search" />
                         </div>
                     </form>
+
                     <ul id="nav-header">
 
                     	<% if admin_signed_in? && current_admin.role_id==4%>

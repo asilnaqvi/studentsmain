@@ -1,14 +1,15 @@
 <%= simple_form_for @teacher,html: { multipart: true } do |f| %>
-<!%= select_tag(:category_id,options_for_select(@boards),:prompt='LESSER THAN KA SIGN AYEGA YAHAN PE AFTER REMOVING THE COMMENT"Select Category") %>
  <%= f.input :full_name, label: "Full Name",class: "input" %>
   <%= f.input :past_experience, label: "Past Experience",class: "input" %>
   <br>
-   <%= f.input :qualification, label: "Qualification",class: "input" %>
-  <br>
+ <%= f.collection_select :qualification, Qualification.all,:name,:name,include_blank: "Choose your Qualification", class: "input"%>  <br>
   <%= f.association :schools,   as: :check_boxes %>
   <br>
+
       <%= f.input :about_us, label: "About",class: "input" %>
  <br>
+  <%= f.association :subjects,   as: :check_boxes %>
+  <br>
   <label class="password required">Upload an image</label> 
   <%= f.file_field :teacher_img %>
   <br>
