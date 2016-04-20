@@ -1,4 +1,8 @@
 class ReviewsController < ApplicationController
+	before_action :find_school
+	before_action :find_review, only: [:show,:edit,:update,:destroy]
+	before_filter :ensure_admin, only: [:edit,:destroy]
+	before_filter :ensure_new_admin, only: [:new]
 	def new
 		@school=School.find(params[:school_id])
 		@review=Review.new
@@ -15,11 +19,40 @@ class ReviewsController < ApplicationController
 		render 'new'
 	end
 	end
+def edit	
+	end
 
+	def update
+		if @review.update(params_review)
+			redirect_to school_path(@school)
+		else
+			render 'edit'
+		end
+	end
+	def destroy
+		if @review.destroy
+			redirect_to root_path
+		end
+	end
+	private
 	def params_review
 		params.require(:review).permit(:rating,:comment)
 	end
 	def find_school
 		@school=School.find(params[:school_id])
 	end
+	def find_review
+		@review=Review.find(params[:id])
+	end
+	def ensure_admin
+ unless current_admin.id==@review.admin_id 
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
+
+def ensure_new_admin
+ unless current_admin 
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
 end
