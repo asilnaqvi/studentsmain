@@ -2,7 +2,15 @@ class SchoolsController < ApplicationController
 	before_action :find_school, only: [:show,:edit,:update,:destroy]
 
 	def index
+		
+	@boards=Board.all
+	@messages=Message.all
+	if params[:board].blank?
 	@schools=School.all.order("created_at DESC")
+else
+	@board=Board.find_by(name: params[:board])
+	@schools=@board.schools
+end
 	end
 	def account
 		@schools=School.where('admin_id'=> 'current_admin.id').order("created_at DESC")

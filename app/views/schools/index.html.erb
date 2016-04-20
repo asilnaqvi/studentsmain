@@ -13,13 +13,9 @@
                 </div>
                 <article class="static-page">
                     <ul id="list-category-team">
-                        <li><a href="team-category.html">Chemistry</a></li>
-                        <li><a href="team-category.html">Management</a></li>
-                        <li><a href="team-category.html">Information Technology</a></li>
-                        <li><a href="team-category.html">Design &amp; Visual</a></li>
-                        <li><a href="team-category.html">Physician</a></li>
-                        <li><a href="team-category.html">Math</a></li>
-                        <li><a href="team-category.html">Earth Science</a></li>
+                        <% @boards.each do |board|%>
+                        <li><a href="team-category.html"><%= link_to board.name,schools_path(board: board.name)%></a></li>
+                       <%end%>
                     </ul>
                     <div id="team-container">
                         <h1 id="main-title">Schools</h1>
@@ -47,69 +43,44 @@
                 </article>
             </div>
             <div id="sidebar">
-                <aside class="widget-container">
-                    <div class="widget-wrapper clearfix">
-				        <h3 class="widget-title">News Category</h3>
-                        <ul>
-                            <li><a href="#">Breaking News</a></li>
-                            <li><a href="#">Science</a></li>
-                            <li><a href="#">Student Story</a></li>
-                            <li><a href="#">Campus Magazine</a></li>
-                            <li><a href="#">Note from Principal</a></li>
-                            <li><a href="#">Faculty News</a></li>
-                        </ul>
-                    </div>
-                </aside>
+                
                 <aside class="widget-container">
 				        <div class="widget-wrapper clearfix">
-				            <h3 class="widget-title">Latest Event</h3>
-				                <ul class="menu event-sidebar">			
+				            <h3 class="widget-title">Latest Messages</h3>
+				                <ul class="menu event-sidebar">	 <% @messages.each do |message| %>		
 								    <li class="clearfix">
 								        <div class="event-date-widget">
-                                            <strong>28</strong>
-                                            <span>Nov</span>
+                                            <% admin_message=message.admin_id
+        admin=Admin.find(admin_message)%>
+                                          <% if admin.role_id==1%>
+          <%= image_tag admin.teacher.teacher_img %>
+       <% elsif admin.role_id==2 %> 
+         <%=   image_tag admin.student.student_img %>
+     <%   else %>
+        <%=    image_tag admin.student.student_img %>
+                <%   end %>  
                                         </div>
                                         <div class="event-content-widget">
+                                             
                                             <article>
-                                                <h4><a href="#">Musicfest 2013</a></h4>
-                                                <p>November 28, 2013 - November 30, 2013<br />
-                                                    9:00 AM - 10:00 AM
+                                                <h4><a href="#"><%=link_to message.title, message_path(message)%></a></h4>
+                                                <p><%=message.created_at%><br />
+                                                 
                                                 </p>
-                                                <em>Campus Auditorium</em>
+                                                <em><% if admin.role_id==1%>
+          <%= admin.teacher.full_name %>
+       <% elsif admin.role_id==2 %> 
+         <%=   admin.student.full_name %>
+     <%   else %>
+        <%=    puts 'Anonymous'%>
+        <%    end %></em>
                                             </article>
-                                            <article>
-                                                <h4><a href="#">HTML5 &amp; CSS3 Workshop</a></h4>
-                                                <p>November 28, 2013<br />
-                                                    11:00 AM - 1:00 PM
-                                                </p>
-                                                <em>IT Center Building E</em>
-                                            </article>
+                                               
                                         </div>
-								    </li>
-                                    <li class="clearfix">
-								        <div class="event-date-widget">
-                                            <strong>25</strong>
-                                            <span>Nov</span>
-                                        </div>
-                                        <div class="event-content-widget">
-                                            <article>
-                                                <h4><a href="#">Foodfest 2013</a></h4>
-                                                <p>November 25, 2013 - November 27, 2013<br />
-                                                    9:00 AM - 10:00 AM
-                                                </p>
-                                                <em>Campus Canteen</em>
-                                            </article>
-                                            <article>
-                                                <h4><a href="#">Student Festival</a></h4>
-                                                <p>November 25, 2013 - November 26, 2013<br />
-                                                    8:00 AM - 9:00 AM
-                                                </p>
-                                                <em>Basketball Court</em>
-                                            </article>
-                                        </div>
-								    </li>
+								    </li><%end%>   
+                                    
 								</ul>
-                            <a href="#" class="button-more">More Event</a>
+                            <a href="#"><%=link_to "More Messages", messages_path,class: "button-more"%></a>
 				        </div>
 				    </aside>
             </div>
