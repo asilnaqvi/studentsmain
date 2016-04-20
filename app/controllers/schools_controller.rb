@@ -48,7 +48,7 @@ end
 		if @school.reviews.blank?
 			@average_review=0
 else
-			@average_review=@school.reviews.average(:rating).round(2)
+			@average_review=@school.reviews.average(:rating)
 		end
 		
 	end

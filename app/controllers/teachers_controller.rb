@@ -1,7 +1,9 @@
 class TeachersController < ApplicationController
-before_action :find_teacher, only: [:show,:edit,:update,:destroy]
-before_filter :ensure_admin, only: [:edit,:destroy]
+	before_action :find_teacher, only: [:show,:edit,:update,:destroy]
+	before_filter :ensure_admin, only: [:edit,:destroy]
 	before_filter :ensure_new_admin, only: [:new]
+
+	
 	def index
 	@teachers=Teacher.all.order("created_at DESC")
 	end
@@ -22,7 +24,7 @@ before_filter :ensure_admin, only: [:edit,:destroy]
 		if @teacher.testimonials.blank?
 			@average_testimonial=0
 else
-			@average_testimonial=@teacher.testimonials.average(:rating).round(2)
+			@average_testimonial=@teacher.testimonials.average(:rating)
 		end
 	end
 
