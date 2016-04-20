@@ -6,7 +6,7 @@ class SchoolsController < ApplicationController
 	@boards=Board.all
 	@messages=Message.all
 	if params[:board].blank?
-	@schools=School.all.order("created_at DESC")
+	@schools=School.all
 else
 	@board=Board.find_by(name: params[:board])
 	@schools=@board.schools
