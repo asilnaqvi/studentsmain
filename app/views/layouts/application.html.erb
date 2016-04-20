@@ -86,6 +86,7 @@
 
 
                                 <% if current_admin.teacher.present? %>
+                                 <li><a href="#"><%=link_to "My Profile",teacher_path(current_admin.teacher)%></a></li>
                                   <% if (params[:controller] == 'teachers' && params[:action]=='show' && current_admin.id == @teacher.admin_id) %>
                                 <li><a href="#"><%=link_to "Edit Profile",edit_teacher_path%></a></li>
                                 <% end%>
@@ -101,6 +102,7 @@
                         <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
                         <%elsif admin_signed_in? && (current_admin.role_id == 2)%>
                         <% if current_admin.student.present? %>
+                        <li><a href="#"><%=link_to "My Profile",student_path(current_admin.student)%></a></li>
                          <% if (params[:controller] == 'students' && params[:action]=='show' && current_admin.id == @student.admin_id ) %>
                         <li><a href="#"><%=link_to "Edit Profile",edit_student_path%></a></li>
                         <% end%>
