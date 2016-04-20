@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
 before_action :find_teacher, only: [:show,:edit,:update,:destroy]
-
+before_filter :ensure_admin, only: [:edit,:destroy]
+	before_filter :ensure_new_admin, only: [:new]
 	def index
 	@teachers=Teacher.all.order("created_at DESC")
 	end
@@ -18,6 +19,11 @@ before_action :find_teacher, only: [:show,:edit,:update,:destroy]
 
 	def show
 		@schools=@teacher.schools
+		if @teacher.testimonials.blank?
+			@average_testimonial=0
+else
+			@average_testimonial=@teacher.testimonials.average(:rating).round(2)
+		end
 	end
 
 	def edit
@@ -46,5 +52,15 @@ before_action :find_teacher, only: [:show,:edit,:update,:destroy]
 		@teacher=Teacher.find(params[:id])
 	end
 
+def ensure_admin
+ unless current_admin.id==@teacher.admin_id && current_admin.role_id==1
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
 
+def ensure_new_admin
+ unless current_admin && current_admin.role_id==1
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
 end

@@ -1,5 +1,8 @@
 class SchoolsController < ApplicationController
 	before_action :find_school, only: [:show,:edit,:update,:destroy]
+	before_filter :ensure_admin, only: [:edit,:destroy]
+	before_filter :ensure_new_admin, only: [:new]
+	
 
 	def index
 		
@@ -12,12 +15,21 @@ else
 	@schools=@board.schools
 end
 	end
+
+
 	def account
-		@schools=School.where('admin_id'=> 'current_admin.id').order("created_at DESC")
+	@boards=Board.all
+	@messages=Message.all
+	if params[:board].blank?
+	@schools=School.where(admin_id: current_admin.id)
+else
+	@board=Board.find_by(name: params[:board])
+	@schools=@board.schools.where(admin_id: current_admin.id)
+end
+		
 	end
 	def new
 		@school=current_admin.schools.build
-
 	end
 
 	def create
@@ -66,6 +78,16 @@ else
 	def find_school
 		@school=School.find(params[:id])
 	end
+def ensure_admin
+ unless current_admin.id==@school.admin_id && current_admin.role_id==4
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
 
+def ensure_new_admin
+ unless current_admin && current_admin.role_id==4
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
 
 end

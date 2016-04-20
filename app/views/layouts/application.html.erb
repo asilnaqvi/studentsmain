@@ -70,27 +70,38 @@
                         </div>
                     </form>
                     <ul id="nav-header">
+
                     	<% if admin_signed_in? && current_admin.role_id==4%>
-                    	<li><a href="#"><%=link_to "Create School",new_school_path%> </a></li>
-                        <% if (params[:controller] == 'schools' && params[:action]=='show') %>
-                        <li><a href="#"><%=link_to "Edit School",edit_school_path(@school)%> </a></li>
-                        <% end  %>
-                          <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
+
+
+                               <li><%=link_to "My Schools",account_schools_path%></li>
+
+                            	<li><a href="#"><%=link_to "Create School",new_school_path%> </a></li>
+                                <% if (params[:controller] == 'schools' && params[:action]=='show') && current_admin.id == @school.admin_id %>
+                                <li><a href="#"><%=link_to "Edit School",edit_school_path(@school)%> </a></li>
+                                 <li><a href="#"><%=link_to "Delete School",school_path(@school),method: :delete,data: {confirm: "Are you sure?"}%> </a></li>
+                                <% end  %>
+                                  <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
                     	<%elsif admin_signed_in? && (current_admin.role_id == 1)%>
-                        <% if current_admin.teacher.present? %>
-                          <% if (params[:controller] == 'teachers' && params[:action]=='show') %>
-                        <li><a href="#"><%=link_to "Edit Profile",edit_teacher_path%></a></li>
-                        <% end%>
+
+
+                                <% if current_admin.teacher.present? %>
+                                  <% if (params[:controller] == 'teachers' && params[:action]=='show' && current_admin.id == @teacher.admin_id) %>
+                                <li><a href="#"><%=link_to "Edit Profile",edit_teacher_path%></a></li>
+                                <% end%>
                         <%else%>
-                         <li><a href="#"><%=link_to "Create Profile",new_teacher_path%></a></li>
+
+
+                                    <li><a href="#"><%=link_to "Create Profile", new_teacher_path%></a></li>
                          <% end%>
+
                         <li><%=link_to "Post Message",new_message_path%></li>
-                         <% if (params[:controller] == 'schools' && params[:action]=='show') %>
-                        <li><a href="#"><%=link_to "Add Reviews", new_school_review_path(@school) %></a> </li><% end%>
+                                 <% if (params[:controller] == 'schools' && params[:action]=='show') %>
+                               <li><a href="#"><%=link_to "Add Reviews", new_school_review_path(@school) %></a> </li><% end%>
                         <li> <a href="#"> <%= link_to "Log out", destroy_admin_session_path, method: :delete%></a></li>
                         <%elsif admin_signed_in? && (current_admin.role_id == 2)%>
                         <% if current_admin.student.present? %>
-                         <% if (params[:controller] == 'students' && params[:action]=='show') %>
+                         <% if (params[:controller] == 'students' && params[:action]=='show' && current_admin.id == @student.admin_id ) %>
                         <li><a href="#"><%=link_to "Edit Profile",edit_student_path%></a></li>
                         <% end%>
                         <%else%>

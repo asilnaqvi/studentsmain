@@ -1,5 +1,7 @@
 class MessagesController < ApplicationController
 	before_action :find_message, only: [:show,:edit,:update,:destroy]
+	before_filter :ensure_admin, only: [:edit,:destroy]
+	before_filter :ensure_new_admin, only: [:new]
 	def index
 		@messages=Message.all.order("created_at DESC")
 	end
@@ -49,4 +51,15 @@ class MessagesController < ApplicationController
 	def find_message
 		@message=Message.find(params[:id])
 	end
+	def ensure_admin
+ unless current_admin.id==@message.admin_id 
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
+
+def ensure_new_admin
+ unless current_admin 
+   render :text => "You are not authorised to perform this action", :status => :unauthorized
+ end
+end
 end

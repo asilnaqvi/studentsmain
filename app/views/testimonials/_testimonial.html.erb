@@ -1,11 +1,11 @@
-<% admin=Admin.find(testimonial.admin_id) %>
+<div style="margin-top:30px;"><% admin=Admin.find(testimonial.admin_id) %>
 <% if admin.student.present? %>
 <li> 
                            
                             <%= image_tag(admin.student.student_img.url(:medium), :class =>  "img-testimonial") %>
                             <p><%= testimonial.testimonial%></p>
                            
-                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= review.rating %>"></div><%= admin.student.full_name%> - <span> Student</span></h3>
+                            <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= testimonial.rating %>"></div><%= admin.student.full_name%> - <span> Student</span></h3>
                         </li>
 <% elsif admin.teacher.present? %>
 <li> 
@@ -22,3 +22,4 @@ You need to be a teacher or a student to write a testimonial.<% end %>
 
 <br>
 
+</div>

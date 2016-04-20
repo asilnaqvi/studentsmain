@@ -18,10 +18,11 @@ class="fn">	<% if comment.admin.role_id==1%>
         <%   else %>
         <%=    puts 'Anonymous'%>
         <%    end %> 
-
+<% if current_admin.id == comment.admin_id%> 
                                 <span><%= link_to image_tag("Pencil-icon.png"),edit_message_comment_path(comment.message,comment)%></span>
                                 <span><%= link_to image_tag("trash-icon.png"),message_comment_path(comment.message,comment), method: :delete, data: {confirm: "Are you sure?"}%>
                                 </span>
+                                 <%end%> 
                                 </cite><div
 class="comment-meta commentmetadata"><%=comment.created_at%></div></div><div
 class="clear"></div><div
