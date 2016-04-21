@@ -53,12 +53,12 @@
 								        <div class="event-date-widget">
                                             <% admin_message=message.admin_id
         admin=Admin.find(admin_message)%>
-                                          <% if admin.role_id==1%>
+                                          <% if admin.role_id==1 && admin.teacher.present?%>
           <%= image_tag admin.teacher.teacher_img %>
-       <% elsif admin.role_id==2 %> 
+       <% elsif admin.role_id==2 && admin.student.present? %> 
          <%=   image_tag admin.student.student_img %>
      <%   else %>
-        <%=    image_tag admin.student.student_img %>
+        <%=    image_tag "text.png" %>
                 <%   end %>  
                                         </div>
                                         <div class="event-content-widget">

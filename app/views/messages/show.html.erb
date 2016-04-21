@@ -65,22 +65,22 @@
         <%    end %> </li>
                             <li>Email: <a href="#"><%= @admin.email%></a></li>
                             <li>Qualification: <% if @admin.role_id==1%>
-          <%= @admin.teacher.qualification %>
+          <%= Qualification.find(@admin.teacher.qualification_id).name %>
        <% elsif @admin.role_id==2 %> 
-         <%=   @admin.student.qualification %>
+         <%=   Qualification.find(@admin.student.qualification_id).name %>
      <%   else %>
         <%=    puts 'Parent'%>
         <%    end %></li>
                             <li><% if @admin.role_id==1%> Past Experience: 
           <%= @admin.teacher.past_experience %>
        <% elsif @admin.role_id==2 %> Date of Admission: 
-         <%=   @admin.student.date_of_admission %>
+         <%=   @admin.student.admission_year %>
      <%   else %>
         <%=    puts 'Anonymous'%>
         <%    end %> </li>
         <li><% if @admin.role_id==1%> Status: Teacher
        <% elsif @admin.role_id==2 %> Status: Student 
-         <%=   @admin.student.date_of_admission %>
+         <%=   @admin.student.admission_year %>
      <%   else %>
         Status: Parent 
         <%    end %> </li>
