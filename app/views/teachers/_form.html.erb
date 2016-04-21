@@ -2,7 +2,7 @@
  <%= f.input :full_name, label: "Full Name",class: "input" %>
   <%= f.input :past_experience, label: "Past Experience",class: "input" %>
   <br>
- <%= f.collection_select :qualification, Qualification.all,:name,:name,include_blank: "Choose your Qualification", class: "input"%>  <br>
+ <%= f.collection_select :qualification_id, Qualification.all,:id,:name,include_blank: "Choose your Qualification", class: "input"%>  <br>
   <%= f.association :schools,   as: :check_boxes %>
   <br>
 

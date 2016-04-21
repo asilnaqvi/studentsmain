@@ -47,14 +47,13 @@
             <div id="sidebar">
                 <aside class="widget-container">
                     <div class="widget-wrapper clearfix">
-				        <h3 class="widget-title">News Category</h3>
+				        <h3 class="widget-title">Search by Qualification</h3>
                         <ul>
-                            <li><a href="#">Breaking News</a></li>
-                            <li><a href="#">Science</a></li>
-                            <li><a href="#">Student Story</a></li>
-                            <li><a href="#">Campus Magazine</a></li>
-                            <li><a href="#">Note from Principal</a></li>
-                            <li><a href="#">Faculty News</a></li>
+                             <% @qualifications.each do |qualification|%>
+                        <li><a href="#"><%= link_to qualification.name,teachers_path(qualification: qualification.name)%></a></li>
+                       <%end%>
+                           
+                           
                         </ul>
                     </div>
                 </aside>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420223617) do
+ActiveRecord::Schema.define(version: 20160421084909) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20160420223617) do
     t.integer  "teacher_img_file_size"
     t.datetime "teacher_img_updated_at"
     t.text     "about_us"
+    t.integer  "qualification_id"
   end
 
   create_table "testimonials", force: :cascade do |t|

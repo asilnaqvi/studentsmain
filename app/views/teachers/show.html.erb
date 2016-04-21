@@ -60,7 +60,7 @@
                             <li>Name: <%= @teacher.full_name%> </li>
                             <li>Email: <a href="#"> <%= Admin.find(@teacher.admin_id).email%></a></li>
                             <li>Past Experience: <%= @teacher.past_experience%></li>
-                            <li>Qualification: <%= @teacher.qualification%></li>
+                            <li>Qualification: <%= Qualification.find(@teacher.qualification_id).name%></li>
                         </ul>
                     </div>
                 </aside>

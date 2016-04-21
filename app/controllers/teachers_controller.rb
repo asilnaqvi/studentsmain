@@ -6,8 +6,12 @@ class TeachersController < ApplicationController
 	
 	def index
 	@subjects=Subject.all
-		if params[:subject].blank?
+	@qualifications=Qualification.all
+		if params[:subject].blank? && params[:qualification].blank?
 	@teachers=Teacher.all.order("created_at DESC")
+elsif params[:qualification].present? && params[:subject].blank?
+	@qualification=Qualification.find_by(name: params[:qualification])
+	@teachers=@qualification.teachers
 else
 	@subject=Subject.find_by(name: params[:subject])
 	@teachers=@subject.teachers
@@ -56,7 +60,7 @@ else
 	end
 	private
 	def params_teacher
-		params.require(:teacher).permit(:full_name,:about_us,:teacher_img,:past_experience,:qualification,:subject_ids=> [],:school_ids=> [])
+		params.require(:teacher).permit(:full_name,:about_us,:teacher_img,:past_experience,:qualification_id,:subject_ids=> [],:school_ids=> [])
 	end
 	def find_teacher
 		@teacher=Teacher.find(params[:id])
