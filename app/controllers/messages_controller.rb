@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 	before_filter :ensure_admin, only: [:edit,:destroy]
 	before_filter :ensure_new_admin, only: [:new]
 	def index
-		@messages=Message.all.order("created_at DESC")
+		@messages=Message.all.order("created_at DESC").paginate(page: params[:page],per_page: 9)
 	end
 	def new
 		@message=current_admin.messages.build

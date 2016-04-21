@@ -8,13 +8,13 @@ class TeachersController < ApplicationController
 	@subjects=Subject.all
 	@qualifications=Qualification.all
 		if params[:subject].blank? && params[:qualification].blank?
-	@teachers=Teacher.all.order("created_at DESC")
+	@teachers=Teacher.all.paginate(page: params[:page],per_page: 9)
 elsif params[:qualification].present? && params[:subject].blank?
 	@qualification=Qualification.find_by(name: params[:qualification])
-	@teachers=@qualification.teachers
+	@teachers=@qualification.teachers.paginate(page: params[:page],per_page: 9)
 else
 	@subject=Subject.find_by(name: params[:subject])
-	@teachers=@subject.teachers
+	@teachers=@subject.teachers.paginate(page: params[:page],per_page: 9)
 end
 	end
 	def new

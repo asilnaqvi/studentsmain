@@ -5,7 +5,7 @@ before_action :find_student, only: [:show,:edit,:update,:destroy]
 
 
 	def index
-	@students=Student.all.order("created_at DESC")
+	@students=Student.all.paginate(page: params[:page],per_page: 9)
 	end
 	def new
 		@student=current_admin.build_student

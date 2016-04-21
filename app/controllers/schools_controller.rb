@@ -9,10 +9,10 @@ class SchoolsController < ApplicationController
 	@boards=Board.all
 	@messages=Message.all
 	if params[:board].blank?
-	@schools=School.all
+	@schools=School.all.paginate(page: params[:page],per_page: 9)
 else
 	@board=Board.find_by(name: params[:board])
-	@schools=@board.schools
+	@schools=@board.schools.paginate(page: params[:page],per_page: 9)
 end
 	end
 
@@ -21,10 +21,10 @@ end
 	@boards=Board.all
 	@messages=Message.all
 	if params[:board].blank?
-	@schools=School.where(admin_id: current_admin.id)
+	@schools=School.where(admin_id: current_admin.id).paginate(page: params[:page],per_page: 9)
 else
 	@board=Board.find_by(name: params[:board])
-	@schools=@board.schools.where(admin_id: current_admin.id)
+	@schools=@board.schools.where(admin_id: current_admin.id).paginate(page: params[:page],per_page: 9)
 end
 		
 	end

@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem "paperclip", "~> 5.0.0.beta1"
 gem 'devise', '~> 3.5', '>= 3.5.6' 
+gem 'will_paginate', '~> 3.1'
