@@ -35,7 +35,6 @@
     <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false, class: "input" %>
     <%= f.input :password_confirmation, required: false, class: "input" %>
     <%= f.input :current_password,  required: true, class: "input" %>
-     <%= f.collection_select :role_id, Role.all,:id,:name,hint: ("Once created cannot be changed") , include_blank: "Choose your role", class: "input", required: true %>
     <%= f.button :submit, "Update", class: "button" %>
  </div>
 <% end %>
