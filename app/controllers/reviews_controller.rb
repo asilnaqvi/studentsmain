@@ -51,7 +51,7 @@ def edit
 end
 
 def ensure_new_admin
- unless current_admin 
+ unless current_admin && current_admin.role_id!=4
    render :text => "You are not authorised to perform this action", :status => :unauthorized
  end
 end
