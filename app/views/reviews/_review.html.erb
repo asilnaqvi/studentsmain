@@ -2,7 +2,7 @@
 <% if admin.student.present? %>
 <li> 
                            
-                            <%= image_tag(admin.student.student_img.url(:thumbnail), :class =>  "img-testimonial") %>
+                            <%= image_tag(admin.student.student_img.url(:thumb), :class =>  "img-testimonial") %>
                             <p><%= review.comment%></p>
                            
                             <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= review.rating %>">
@@ -16,7 +16,7 @@
 <% elsif admin.teacher.present? %>
 <li> 
                            
-                            <%= image_tag(admin.teacher.teacher_img.url(:thumbnail), :class =>  "img-testimonial") %>
+                            <%= image_tag(admin.teacher.teacher_img.url(:thumb), :class =>  "img-testimonial") %>
                             <p><%= review.comment%></p>
                            
                             <h3 class="testimonial-title"> <div class="review-rating" data-score="<%= review.rating %>"><% if current_admin%><% if current_admin.id == review.admin_id%> <div style="float:right; margin-right:55px;"><span><%= link_to image_tag("Pencil-icon.png"),edit_school_review_path(review.school,review)%></span>
