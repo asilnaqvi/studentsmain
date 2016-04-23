@@ -67,7 +67,7 @@
                             <li>Qualification: <% if @admin.role_id==1%>
           <%= Qualification.find(@admin.teacher.qualification_id).name %>
        <% elsif @admin.role_id==2 %> 
-         <%=   Qualification.find(@admin.student.qualification_id).name %>
+         <%=   @admin.student.qualification %>
      <%   else %>
         <%=    puts 'Parent'%>
         <%    end %></li>

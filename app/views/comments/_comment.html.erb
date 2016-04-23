@@ -1,13 +1,17 @@
 <div
 class="comment comment-wrap" ><div
-class="comment-avatar"><% if comment.admin.role_id==1%>
+class="comment-avatar">
+
+<% if comment.admin.role_id==1%>
 	<%=image_tag comment.admin.teacher.teacher_img,size: "60",class: "thumbnail" %>
           <%= comment.admin.teacher.full_name %>
        <% elsif comment.admin.role_id==2 %> 
       <%=image_tag comment.admin.student.student_img, size: "60",class: "thumbnail" %>
-        <%= comment.admin.student.full_name %> <%   else %>
-       <%=image_tag "placeholder_avatar.png", size: "60",class: "thumbnail" %>
-        <%    end %></div>
+        <%= comment.admin.student.full_name %>
+         <% else %>
+       <%= image_tag "placeholder_avatar.png", size: "60",class: "thumbnail" %>
+        <%    end %>
+      </div>
 <div class="author-comment"> <cite
 class="fn">	<% if comment.admin.role_id==1%>
 	
