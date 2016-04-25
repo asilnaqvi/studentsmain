@@ -3,12 +3,12 @@ class Admin < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-has_many :schools
-has_many :reviews
-has_many :testimonials
-has_many :messages
-has_one :teacher
-has_one :student
+has_many :schools, dependent: :destroy
+has_many :reviews, dependent: :destroy
+has_many :testimonials, dependent: :destroy
+has_many :messages, dependent: :destroy
+has_one :teacher, dependent: :destroy
+has_one :student, dependent: :destroy
 belongs_to :role
-has_many :comments
+has_many :comments, dependent: :destroy
 end
